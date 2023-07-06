@@ -192,7 +192,16 @@ class Controller {
         res.redirect('/tweets');
       })
       .catch((err) => {
-        res.send(err);
+        let error = '';
+        if (err.name === "SequelizeValidationError") {
+          err.errors.forEach(e => {
+            error += `, ${e.message}`;
+          });
+          res.redirect(`/profile?error=${error}`);
+        }
+        else {
+          res.send(err);
+        }
       });
   }
 
