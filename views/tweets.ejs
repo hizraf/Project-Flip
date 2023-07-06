@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <%- include('header') %>
+
+  <h1><%= data.id %></h1>
+  
+  <h3>Home Page</h3>
+  <a href="/addTweet"><button>Add Tweet</button></a>
+  <table border="1">
+    <tr>
+      <th>User</th>
+      <th>Tweet</th>
+      <th>Pictures</th>
+      <th>Tag</th>
+      <th><%= req.session %></th>
+    </tr>
+<% data.forEach(e => { %>
+  <tr>
+    <td><%= e.User.Profile.fullName() %></td>
+    <td><%= e.text %></td>
+    <td> <img src="<%= e.imageUrl %>" alt=""></td>
+    <td>
+      <ul>
+        <% e.Hastags.forEach(h => { %>
+          <li><%= h.name %></li>
+        <% }) %>
+      </ul> 
+    </td>
+  </tr>
+<% }) %>
+  </table>
+</body>
+</html>

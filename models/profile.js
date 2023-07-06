@@ -13,6 +13,11 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Profile.belongsTo(models.User);
     }
+
+
+    fullName() {
+      return `${this.firstName} ${this.lastName}`;
+    }
   }
   Profile.init({
     firstName: DataTypes.STRING,
