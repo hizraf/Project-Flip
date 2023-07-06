@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  
+</head>
+<body>
+  <%- include('header') %>
+  <h3>My Profile</h3>
+  <% if (error) { %>
+    <h3><%= error %></h3>
+  <% } %>
+
+  <% if (data) { %>
+
+    <h3>Ubah Profile?</h3>
+    <form action="/profileUpdate" method="post">
+     <label for="firstname">First Name</label><br>
+     <input type="text" name="firstName" value="<%= data.firstName %>"><br>
+     <label for="lastName">last Name</label><br>
+     <input type="text" name="lastName" value="<%= data.lastName %>"><br><br>
+   
+     <label for="lastName">Birth Of Date</label><br>
+     <input type="date" name="birthOfDate" value="<%= data.formattedDate %>"><br><br>
+     <label for="lastName">gender</label><br>
+
+
+     <select name="gender" id="">
+      <option value="male">male</option>
+      <option value="female">female</option>
+     </select>
+   
+   
+     <input type="submit" value="Submit">
+   
+    </form>
+ 
+  <% } else { %>
+    <h3>kamu belum pernah bikin profile nih yuk buat</h3>
+    <form action="/profileInsert" method="post">
+      <label for="firstname">First Name</label><br>
+      <input type="text" name="firstName" value=""><br>
+      <label for="lastName">last Name</label><br>
+      <input type="text" name="lastName" value=""><br><br>
+    
+      <label for="lastName">Birth Of Date</label><br>
+      <input type="date" name="birthOfDate" value=""><br><br>
+      <label for="lastName">gender</label><br>
+      <select name="gender" id="">
+        <option value="male">male</option>
+        <option value="female">female</option>
+       </select>
+    
+      <input type="submit" value="Submit">
+    
+     </form>
+  <%}%>
+  
+  
+</body>
+</html>

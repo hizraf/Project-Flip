@@ -8,23 +8,43 @@
 <body>
   <%- include('header') %>
 
-  <h1><%= data.id %></h1>
+  <% if (role === 'admin') { %>
+    <p>Welcome. Your role is <%= role %> you can delete Users Post.</p>
+  <% } else { %>
+    <p>Welcome. You can Tweet here..</p>
+  <% } %>
   
   <h3>Home Page</h3>
+  <a href="/logout"><button>Logout</button></a>
   <a href="/addTweet"><button>Add Tweet</button></a>
+  <a href="/profile"><button>My profile Profile</button></a>
+  <form>
+    <label for="gsearch">Serch By User:</label>
+    <input type="search" id="gsearch" name="search">
+    <input type="submit">
+  </form>
   <table border="1">
     <tr>
       <th>User</th>
       <th>Tweet</th>
       <th>Pictures</th>
       <th>Tag</th>
-      <th><%= req.session %></th>
+      <th>Upload Time</th>
+      <% if (role==='admin') { %>
+        <th>Action For Admin</th>
+      <% } %>
     </tr>
 <% data.forEach(e => { %>
   <tr>
-    <td><%= e.User.Profile.fullName() %></td>
+   
+      <% if (e.User.Profile) { %>
+        <td><%= e.User.Profile.fullName() %></td>      
+     <% }else {%>
+      <td>Anonym</td> 
+     <%}%>
+
     <td><%= e.text %></td>
-    <td> <img src="<%= e.imageUrl %>" alt=""></td>
+    <td> <img src="<%= e.imageUrl %>" alt="" style="width: 250px;height: 250px;"></td>
     <td>
       <ul>
         <% e.Hastags.forEach(h => { %>
@@ -32,6 +52,10 @@
         <% }) %>
       </ul> 
     </td>
+    <td><%= helpers(e.createdAt) %></td>
+    <% if (role==='admin') { %>
+      <td><a href="delete/<%=e.id %>"><button>Delete</button></a></td>
+     <% } %>
   </tr>
 <% }) %>
   </table>

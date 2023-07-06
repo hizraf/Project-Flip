@@ -9,11 +9,27 @@
 <body>
   <%- include('header') %>
   <h3>Add Post</h3>
+
+<% if (error) { %>
+  <h3><%= error %></h3>
+<% } %>
+
  <form action="/addTweet" method="post" encType="multipart/form-data">
   <label for="text">Text</label><br>
-  <input type="text" name="text"><br>
+ <textarea name="text" id="" cols="30" rows="10"></textarea><br>
   <label for="email">Image</label><br>
   <input type="file" name="imageUrl"><br><br>
+
+  <% data.forEach(e => { %>
+    <input type="checkbox" id="<%= e.id %>" name="tags" value="<%= e.id %>">
+    <label for="tags"><%= e.name %></label><br>
+  <% }) %>
+
+  
+  
+  
+  
+  <br>
   <input type="submit" value="Tweet">
 
  </form>

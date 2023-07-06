@@ -15,10 +15,44 @@ module.exports = (sequelize, DataTypes) => {
       User.hasOne(models.Profile);
       User.hasMany(models.Tweet);
     }
+
+    static autoUser() {
+      return 'user';
+    }
   }
   User.init({
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: false,
+      validate: {
+        notNull: {
+          msg: 'email name required'
+        },
+        notEmpty: {
+          msg: 'email name required'
+        },
+        isEmail: {
+          msg: 'Harus email ya'
+        }
+      }
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: 'password name required'
+        },
+        notEmpty: {
+          msg: 'password name required'
+        },
+        len: {
+          args: [8, Infinity],
+          msg: 'Password Harus 8 '
+        }
+      }
+    },
     role: DataTypes.STRING
   }, {
     sequelize,

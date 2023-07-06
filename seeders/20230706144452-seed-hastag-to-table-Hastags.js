@@ -1,5 +1,5 @@
 'use strict';
-const data = require('../user-test.json');
+const data = require('./data/hastag.json');
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -17,7 +17,8 @@ module.exports = {
       e.createdAt = e.updatedAt = new Date();
       return e;
     });
-    await queryInterface.bulkInsert('Users', dataMapped);
+    await queryInterface.bulkInsert('Hastags', dataMapped);
+
   },
 
   async down(queryInterface, Sequelize) {
@@ -27,6 +28,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('Users', null, {});
+    await queryInterface.bulkDelete('Hastags', null, {});
   }
 };

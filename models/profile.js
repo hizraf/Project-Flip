@@ -13,6 +13,13 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Profile.belongsTo(models.User);
     }
+    get formattedDate() {
+      const date = new Date(this.birthOfDate);
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
 
 
     fullName() {
@@ -20,11 +27,73 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Profile.init({
-    firstName: DataTypes.STRING,
-    lastName: DataTypes.STRING,
-    birthOfDate: DataTypes.DATE,
-    gender: DataTypes.STRING,
-    UserId: DataTypes.INTEGER
+    firstName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: 'first name required'
+        },
+        isAlpha: {
+          msg: 'first name must letter'
+        },
+        notEmpty: {
+          msg: 'first name required'
+        }
+      }
+    },
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: 'first name required'
+        },
+        isAlpha: {
+          msg: 'last name must letter'
+        },
+        notEmpty: {
+          msg: 'first name required'
+        }
+      }
+    },
+    birthOfDate: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: 'date name required'
+        },
+        notEmpty: {
+          msg: 'date name required'
+        }
+      }
+    },
+    gender: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: 'first name required'
+        },
+        notEmpty: {
+          msg: 'first name required'
+        }
+      }
+    },
+    UserId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: 'first name required'
+        },
+        notEmpty: {
+          msg: 'first name required'
+        }
+      }
+
+    }
   }, {
     sequelize,
     modelName: 'Profile',

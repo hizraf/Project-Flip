@@ -13,19 +13,19 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: {
           model: 'Tweets',
-          key: 'id',
-          onDelete: 'CASCADE',
-          onUpdate: 'CASCADE'
-        }
+          key: 'id'
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
       },
       HastagId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Hastags',
           key: 'id',
-          onDelete: 'CASCADE',
-          onUpdate: 'CASCADE'
-        }
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
       },
       createdAt: {
         allowNull: false,
